@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const axiosServices = axios.create();
+const axiosServices = axios.create({
+  baseURL: 'http://localhost:4444'
+});
 
 // ==============================|| AXIOS - FOR MOCK SERVICES ||============================== //
 

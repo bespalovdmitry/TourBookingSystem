@@ -26,9 +26,9 @@ const MainRoutes = {
     {
       path: '/',
       element: (
-          <AuthGuard>
-            <MainLayout />
-          </AuthGuard>
+        <AuthGuard>
+          <MainLayout />
+        </AuthGuard>
       ),
       children: [
         {
@@ -37,13 +37,13 @@ const MainRoutes = {
             {
               path: 'calendar',
               element: <AppCalendar />
-            },
+            }
           ]
         },
         {
           path: 'sample-page',
           element: <SamplePage />
-        },
+        }
       ]
     },
     {

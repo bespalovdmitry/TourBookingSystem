@@ -11,7 +11,7 @@ import calendar from './calendar';
 const reducers = combineReducers({
   menu,
   snackbar,
-  calendar,
+  calendar
 });
 
 export default reducers;

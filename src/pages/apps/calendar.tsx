@@ -18,7 +18,15 @@ import CalendarStyled from 'sections/apps/calendar/CalendarStyled';
 import Toolbar from 'sections/apps/calendar/Toolbar';
 import AddEventForm from 'sections/apps/calendar/AddEventForm';
 import { RootStateProps } from 'types/root';
-import { getEvents, selectEvent, selectRange, toggleModal, updateCalendarView, updateEvent } from 'store/reducers/calendar';
+import {
+  fetchEvents,
+  getEvents,
+  selectEvent,
+  selectRange,
+  toggleModal,
+  updateCalendarView,
+  updateEvent
+} from 'store/reducers/calendar';
 
 // types
 import { PlusOutlined } from '@ant-design/icons';
@@ -42,6 +50,9 @@ const Calendar = () => {
 
   useEffect(() => {
     dispatch(getEvents());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchEvents());
   }, [dispatch]);
 
   useEffect(() => {
@@ -117,7 +128,8 @@ const Calendar = () => {
   };
 
   const handleEventSelect = (arg: EventClickArg) => {
-    dispatch(selectEvent(arg.event.id));
+    console.log(arg.event.extendedProps._id)
+    dispatch(selectEvent(arg.event.extendedProps._id));
   };
 
   const handleEventUpdate = async ({ event }: EventResizeDoneArg | EventDropArg) => {

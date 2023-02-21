@@ -30,7 +30,7 @@ export const events: EventInput[] = [
     allDay: true,
     color: EVENT_COLORS[2],
     description: 'Sorry, John!',
-    start: sub(new Date(), { days: 8, hours: 0, minutes: 45 }),
+    start: '2023-03-14T18:23:33.860+00:00',
     end: sub(new Date(), { days: 8, hours: 0, minutes: 30 }),
     title: 'Conference'
   },

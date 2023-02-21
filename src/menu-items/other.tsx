@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { ChromeOutlined, QuestionOutlined, DeploymentUnitOutlined, CalendarOutlined } from '@ant-design/icons';
+import { CalendarOutlined, ChromeOutlined, DeploymentUnitOutlined, QuestionOutlined } from '@ant-design/icons';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -35,7 +35,7 @@ const other: NavItemType = {
       type: 'item',
       url: '/apps/calendar',
       icon: icons.CalendarOutlined
-    },
+    }
   ]
 };
 

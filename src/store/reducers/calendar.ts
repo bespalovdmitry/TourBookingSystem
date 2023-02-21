@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // third-party
 import { EventInput } from '@fullcalendar/common';
 
 // project import
 import axios from 'utils/axios';
+import axiosServices from 'utils/axios';
 import { dispatch } from 'store';
 
 // types
@@ -20,6 +21,10 @@ const initialState: CalendarProps = {
   selectedRange: null
 };
 
+export const fetchEvents = createAsyncThunk('events/fetchEvents', async () => {
+  const { data } = await axiosServices.get('/events');
+  return data;
+});
 // ==============================|| CALENDAR - SLICE ||============================== //
 
 const calendar = createSlice({
@@ -57,10 +62,10 @@ const calendar = createSlice({
 
     // create event
     createEvent(state, action) {
-      const newEvent = action.payload;
-      state.isLoader = false;
-      state.isModalOpen = false;
-      state.events = [...state.events, newEvent];
+      // const newEvent = action.payload;
+      // state.isLoader = false;
+      // state.isModalOpen = false;
+      // state.events = [...state.events, newEvent];
     },
 
     // update event
@@ -101,6 +106,16 @@ const calendar = createSlice({
         state.selectedRange = null;
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchEvents.pending, (state) => {
+      state.events = [];
+      state.isLoader = true;
+    });
+    builder.addCase(fetchEvents.fulfilled, (state, action) => {
+      state.events = action.payload;
+      state.isLoader = false;
+    });
   }
 });
 
@@ -112,7 +127,7 @@ export function getEvents() {
   return async () => {
     dispatch(calendar.actions.loading());
     try {
-      const response = await axios.get('/api/calendar/events');
+      const response = await axios.get('/events');
       dispatch(calendar.actions.setEvents(response.data.events));
     } catch (error) {
       dispatch(calendar.actions.hasError(error));
